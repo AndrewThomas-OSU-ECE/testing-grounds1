@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "queue.h"
+#include "stack.h"
+
+
+/*
+ * Define your call struct here.
+ */
+typedef struct caller
+{
+int id;
+//int test;
+char* name;
+char* reason;
+} caller;
+
+
+
+int main(int argc, char const *argv[]) {
+   // struct queue* newQueue = malloc(sizeof(struct queue));
+  //    struct stack* newStack = malloc(sizeof(struct stack));
+   struct queue *newQueue = queue_create();
+   struct stack *newStack = stack_create();
+  int queue_size = 0;
+  int stack_size = 0;
+  int exit = 0;
+  int result;
+  int fancy = 0;
+  while(exit == 0){
+   if(fancy == 0){
+  fancy++;
+   }
+   else{
+     printf("\n\n");
+     }
+  printf(" 1. Recieve a new call\n 2. Answer a call\n 3. Current state of the stack - answered calls\n 4. Current state of the queue - calls to be answered\n 5. Quit\n Choose an Option \n");
+  scanf("%d", &result);
+   //  printf("Number = %d",result);
+   printf("\n\n");
+  if(result == 1){ //recieve call - add to queue
+  struct caller* newCaller = malloc(sizeof(struct caller));
+  printf("we are reciving a call now\n");
+   // scanf("%d", &(*newCaller).name);
+  printf("what is your name\n");
+      char strOne[50];
+    scanf("%s",strOne);
+    (*newCaller).name = strOne;
+ //      scanf("%s", &(*newCaller).name);
+  printf("what is your id\n");
+    scanf("%d", &(*newCaller).id);
+    printf("what is the reason you called\n");
+         char strTwo[50];
+    scanf("%s",strTwo);
+    (*newCaller).reason = strTwo; 
+ //     scanf("%s", &(*newCaller).reason);
+    printf("call recieved\n");
+
+   //  struct queue* newQueue = malloc(sizeof(struct queue));
+     queue_enqueue(newQueue, newCaller); 
+     queue_size++;
+      
+  }
+  else if(result == 2){ // answer call - remove from queue and add to stack
+ // printf("T"
+  // struct caller* specificCaller = queue_dequeue(newQueue);
+      struct caller* specificCaller = queue_dequeue(newQueue);
+   stack_push(newStack, specificCaller);
+   printf("the following call has been answered\n");
+  printf("name: %s\n", (*specificCaller).name);
+  printf("id: %d\n",  (*specificCaller).id);
+  printf("reason: %s\n",  (*specificCaller).reason);
+   
+  }
+  else if(result == 3){ // answered calls - print stack
+  
+  }
+  else if(result == 4){ // calls to be answered - print queue
+/*
+remove top mark to aceess
+
+  printf("these are calls to be answered\n");
+  printf("there are %d calls to be answered\n", queue_size);
+  for(int i = 0; i < queue_size; i++){
+  printf("caller #%d\n", i);
+  struct caller *thisCaller = (*newQueue).array[i];
+ // struct caller* thisCaller = newQueue.array[i];
+  printf("name: %s\n", (*thisCaller).name);
+  printf("id: %d\n",  (*thisCaller).id);
+  printf("reason: %s\n",  (*thisCaller).reason);
+}  
+  /*
+  printf("name: %s\n", (*(*newQueue).array[i]).name));
+  printf("id: %d\n",  (*(*newQueue).array[i]).id));
+  printf("reason: %s\n",  (*(*newQueue).array[i]).reason));
+  */
+
+  }
+  else if(result == 5){ // exit
+  exit++;
+  }
+  else{
+   printf("please enter a valid input (numbers 1-5)\n");
+  } 
+  
+  }
+  
+  
+  
+	return 0;
+}
