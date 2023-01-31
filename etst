@@ -85,17 +85,22 @@ int main(int argc, char const *argv[]) {
   else if(result == 3){ // answered calls - print stack
     printf("these are calls that have been answered\n");
   printf("there are %d calls that have been answered\n", stack_size);
-  for(int i = 0; i < stack_size; i++){
-  printf("answered caller #%d\n", i+1);
+ // for(int i = 0; i < stack_size; i++){
+  if(stack_size == 0){
+ }
+ else{
+  printf("answered caller #%d\n", 1);
   //  struct caller* thisCaller = queue_dequeue(newQueue);
   //struct caller* thisCaller = getQueue(newQueue, i);
 
 //update this caller for stack and list
-   struct caller* thisCaller = getStack(newStack, i);
+   int j = 0;
+   struct caller* thisCaller = getStack(newStack, j);
    //struct caller* thisCaller = getQueue(newQueue, getPosition(newQueue) + i);
   printf("name: %s\n", (*thisCaller).name);
   printf("id: %d\n",  (*thisCaller).id);
   printf("reason: %s\n",  (*thisCaller).reason);
+  //}
   }
   }
   else if(result == 4){ // calls to be answered - print queue
@@ -104,24 +109,51 @@ int main(int argc, char const *argv[]) {
 
   printf("these are calls to be answered\n");
   printf("there are %d calls to be answered\n", queue_size);
-  for(int i = 0; i < queue_size; i++){
-  printf("caller #%d\n", i+1);
+ // for(int i = 0; i < queue_size; i++){
+ 
   //  struct caller* thisCaller = queue_dequeue(newQueue);
   //struct caller* thisCaller = getQueue(newQueue, i);
+ if(queue_size == 0){
+ }
+ else{
+ printf("caller #%d\n", 1);
+  int i = 0;
    struct caller* thisCaller = getQueue(newQueue, getPosition(newQueue) + i);
   printf("name: %s\n", (*thisCaller).name);
   printf("id: %d\n",  (*thisCaller).id);
   printf("reason: %s\n",  (*thisCaller).reason);
-}  
+//}  
   /*
   printf("name: %s\n", (*(*newQueue).array[i]).name));
   printf("id: %d\n",  (*(*newQueue).array[i]).id));
   printf("reason: %s\n",  (*(*newQueue).array[i]).reason));
   */
-
+  }
   }
   else if(result == 5){ // exit
   exit++;
+  printf("have a great day!\n");
+ /*time to clear the names
+ */
+//stack
+
+for(int i = 0; i < stack_size; i++){
+// printf("caller #%d\n", 1);
+   struct caller* thisCaller = getStack(newStack, i);
+  free((*thisCaller).name);
+   free((*thisCaller).reason);
+ }
+//queue
+for(int i = 0; i < queue_size; i++){
+// printf("caller #%d\n", 1);
+   struct caller* thisCaller = getQueue(newQueue, i);
+  free((*thisCaller).name);
+   free((*thisCaller).reason);
+ }
+ 
+ //free the queue and dynarray in the queue and same for the stack
+  queue_free(newQueue);
+  stack_free(newStack);
   }
   else{
    printf("please enter a valid input (numbers 1-5)\n");
