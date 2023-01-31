@@ -44,17 +44,19 @@ int main(int argc, char const *argv[]) {
   struct caller* newCaller = malloc(sizeof(struct caller));
   printf("we are reciving a call now\n");
    // scanf("%d", &(*newCaller).name);
-  printf("what is your name\n");
-      char strOne[50];
+  printf("what is your name\n");   
+     char *strOne = (char *)malloc(sizeof(char)*50);
     scanf("%s",strOne);
     (*newCaller).name = strOne;
  //      scanf("%s", &(*newCaller).name);
+
+ 
   printf("what is your id\n");
     scanf("%d", &(*newCaller).id);
     printf("what is the reason you called\n");
-         char strTwo[50];
+     char *strTwo = (char *)malloc(sizeof(char)*50);
     scanf("%s",strTwo);
-    (*newCaller).reason = strTwo; 
+    (*newCaller).reason = strTwo;
  //     scanf("%s", &(*newCaller).reason);
     printf("call recieved\n");
 
@@ -78,15 +80,17 @@ int main(int argc, char const *argv[]) {
   
   }
   else if(result == 4){ // calls to be answered - print queue
-/*
-remove top mark to aceess
+
+//remove top mark to aceess
 
   printf("these are calls to be answered\n");
   printf("there are %d calls to be answered\n", queue_size);
   for(int i = 0; i < queue_size; i++){
-  printf("caller #%d\n", i);
-  struct caller *thisCaller = (*newQueue).array[i];
+  printf("caller #%d\n", i+1);
+//  struct caller *thisCaller = (*newQueue).array[i];
  // struct caller* thisCaller = newQueue.array[i];
+// struct caller* thisCaller = (*newQueue).array[i];
+    struct caller* thisCaller = queue_dequeue(newQueue);
   printf("name: %s\n", (*thisCaller).name);
   printf("id: %d\n",  (*thisCaller).id);
   printf("reason: %s\n",  (*thisCaller).reason);
