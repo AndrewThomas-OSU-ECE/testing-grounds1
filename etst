@@ -76,13 +76,27 @@ int main(int argc, char const *argv[]) {
   printf("id: %d\n",  (*specificCaller).id);
   printf("reason: %s\n",  (*specificCaller).reason);
       queue_size--;
+      stack_size++;
       }
       else{
       printf("There are no calls to be answered\n");
       }
   }
   else if(result == 3){ // answered calls - print stack
-  
+    printf("these are calls that have been answered\n");
+  printf("there are %d calls that have been answered\n", stack_size);
+  for(int i = 0; i < stack_size; i++){
+  printf("answered caller #%d\n", i+1);
+  //  struct caller* thisCaller = queue_dequeue(newQueue);
+  //struct caller* thisCaller = getQueue(newQueue, i);
+
+//update this caller for stack and list
+   struct caller* thisCaller = getStack(newStack, i);
+   //struct caller* thisCaller = getQueue(newQueue, getPosition(newQueue) + i);
+  printf("name: %s\n", (*thisCaller).name);
+  printf("id: %d\n",  (*thisCaller).id);
+  printf("reason: %s\n",  (*thisCaller).reason);
+  }
   }
   else if(result == 4){ // calls to be answered - print queue
 
@@ -92,9 +106,6 @@ int main(int argc, char const *argv[]) {
   printf("there are %d calls to be answered\n", queue_size);
   for(int i = 0; i < queue_size; i++){
   printf("caller #%d\n", i+1);
-//  struct caller *thisCaller = (*newQueue).array[i];
- // struct caller* thisCaller = newQueue.array[i];
-// struct caller* thisCaller = (*(*newQueue).array).data[i];
   //  struct caller* thisCaller = queue_dequeue(newQueue);
   //struct caller* thisCaller = getQueue(newQueue, i);
    struct caller* thisCaller = getQueue(newQueue, getPosition(newQueue) + i);
