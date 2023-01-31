@@ -74,7 +74,7 @@ int main(int argc, char const *argv[]) {
   printf("name: %s\n", (*specificCaller).name);
   printf("id: %d\n",  (*specificCaller).id);
   printf("reason: %s\n",  (*specificCaller).reason);
-   
+      queue_size--;
   }
   else if(result == 3){ // answered calls - print stack
   
@@ -89,8 +89,9 @@ int main(int argc, char const *argv[]) {
   printf("caller #%d\n", i+1);
 //  struct caller *thisCaller = (*newQueue).array[i];
  // struct caller* thisCaller = newQueue.array[i];
-// struct caller* thisCaller = (*newQueue).array[i];
-    struct caller* thisCaller = queue_dequeue(newQueue);
+// struct caller* thisCaller = (*(*newQueue).array).data[i];
+  //  struct caller* thisCaller = queue_dequeue(newQueue);
+  struct caller* thisCaller = getQueue(newQueue, i);
   printf("name: %s\n", (*thisCaller).name);
   printf("id: %d\n",  (*thisCaller).id);
   printf("reason: %s\n",  (*thisCaller).reason);
